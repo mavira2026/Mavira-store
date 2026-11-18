@@ -1,0 +1,993 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080807">
+<title>MAVIRA | The Art of Everyday Luxury</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+ --bg:#080807;
+ --surface:#11100e;
+ --gold:#d6ad64;
+ --gold2:#f2d69d;
+ --white:#f5f0e7;
+ --muted:#a49b8d;
+ --border:rgba(214,173,100,.2);
+ --serif:'Cormorant Garamond',serif;
+ --sans:'DM Sans',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:95px}
+body{background:var(--bg);color:var(--white);font-family:var(--sans);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+button{cursor:pointer}
+::selection{background:var(--gold);color:#080807}
+
+/* PRELOADER */
+.loader{
+ position:fixed;inset:0;background:var(--bg);z-index:9999;
+ display:flex;flex-direction:column;align-items:center;
+ justify-content:center;gap:18px;transition:.7s;
+}
+.loader.hide{opacity:0;visibility:hidden}
+.loader img{width:145px;height:145px;object-fit:contain}
+.loader p{font-size:9px;letter-spacing:4px;color:var(--gold)}
+.loader-line{height:1px;width:120px;background:var(--gold);animation:loading 1.3s infinite}
+@keyframes loading{0%,100%{transform:scaleX(.2)}50%{transform:scaleX(1)}}
+
+/* ANNOUNCEMENT */
+.announcement{
+ background:linear-gradient(90deg,#b58a47,#f3d69c,#b58a47);
+ color:#100d08;text-align:center;padding:10px;
+ font-size:9px;font-weight:700;letter-spacing:2.5px;
+}
+
+/* NAVIGATION */
+.navbar{
+ height:88px;padding:0 8%;
+ display:flex;align-items:center;justify-content:space-between;
+ background:rgba(8,8,7,.94);backdrop-filter:blur(18px);
+ border-bottom:1px solid var(--border);
+ position:sticky;top:0;z-index:100;
+}
+.brand img{height:76px;width:76px;object-fit:contain}
+.nav-links{display:flex;gap:35px}
+.nav-links a{font-size:11px;color:#d0c7b8;letter-spacing:1px;transition:.3s}
+.nav-links a:hover{color:var(--gold)}
+.nav-button{
+ border:1px solid var(--border);padding:14px 18px;
+ font-size:10px;letter-spacing:1px;transition:.3s;
+}
+.nav-button:hover{background:var(--gold);color:#080807}
+.nav-button span{color:var(--gold)}
+.menu-toggle{display:none;background:none;border:0;color:var(--gold);font-size:27px}
+
+/* HERO */
+.hero{
+ min-height:690px;display:flex;align-items:center;
+ padding:90px 11%;position:relative;overflow:hidden;
+ background:
+ radial-gradient(ellipse at 80% 48%,rgba(190,140,65,.16),transparent 36%),
+ linear-gradient(120deg,#090908,#15110b);
+}
+.hero:after{
+ content:"M";position:absolute;right:8%;top:50%;
+ transform:translateY(-50%);
+ font-family:var(--serif);font-size:min(46vw,590px);
+ color:rgba(214,173,100,.045);
+}
+.hero-glow{
+ position:absolute;right:10%;width:350px;height:350px;
+ background:rgba(214,173,100,.1);filter:blur(110px);
+}
+.hero-content{position:relative;z-index:2;max-width:790px}
+.eyebrow{
+ color:var(--gold);font-size:10px;letter-spacing:3px;
+ display:inline-flex;align-items:center;gap:12px;
+}
+.eyebrow i{height:1px;width:25px;background:var(--gold)}
+.hero h1{
+ font-family:var(--serif);font-size:clamp(50px,6.5vw,88px);
+ line-height:.99;font-weight:500;margin:30px 0;letter-spacing:-2px;
+}
+.hero h1 span{color:var(--gold)}
+.hero-content>p{
+ color:#aaa398;max-width:470px;line-height:1.9;font-size:13px;
+}
+.hero-actions{display:flex;align-items:center;gap:30px;margin-top:38px}
+.gold-button{
+ display:inline-flex;align-items:center;justify-content:center;
+ gap:20px;padding:17px 24px;
+ background:linear-gradient(120deg,#f0d49b,#bd914a);
+ color:#100d08;font-size:10px;font-weight:700;letter-spacing:1.2px;
+ border:0;transition:.3s;
+}
+.gold-button:hover{transform:translateY(-4px);box-shadow:0 12px 35px #d6ad6430}
+.text-button{font-size:10px;letter-spacing:1px}
+.text-button:hover{color:var(--gold)}
+.hero-stats{display:flex;gap:55px;margin-top:80px}
+.hero-stats div{display:flex;flex-direction:column;gap:7px}
+.hero-stats strong{font-family:var(--serif);color:var(--gold);font-size:26px;font-weight:400}
+.hero-stats span{font-size:9px;color:var(--muted);letter-spacing:1px}
+.hero-side{position:absolute;right:4%;top:45%;writing-mode:vertical-rl;color:#9c8051;letter-spacing:5px;font-size:9px}
+
+/* BRAND STRIP */
+.brand-strip{
+ display:flex;align-items:center;justify-content:center;gap:40px;
+ flex-wrap:wrap;padding:24px;background:#12100c;
+ border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.brand-strip span{font-size:9px;letter-spacing:3px;color:#d8c6a5}
+.brand-strip b{color:var(--gold)}
+
+/* COMMON SECTION */
+.section{padding:105px 8%}
+.section-heading{
+ display:flex;justify-content:space-between;
+ align-items:flex-end;margin-bottom:48px;
+}
+.section-heading h2,.story-content h2,.contact-inner h2{
+ font-family:var(--serif);font-size:64px;font-weight:500;
+ line-height:1;margin-top:15px;
+}
+.section-heading h2 em,.story-content h2 em,.contact-inner h2 em{
+ color:var(--gold);font-weight:400;
+}
+.section-heading>p{font-size:11px;color:var(--muted);line-height:2}
+
+/* SEARCH */
+.catalogue-tools{
+ display:flex;justify-content:space-between;
+ align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:30px;
+}
+.filters{display:flex;gap:9px;flex-wrap:wrap}
+.filter{
+ background:transparent;border:1px solid var(--border);
+ color:#bcb3a4;padding:11px 15px;font-size:9px;
+ transition:.3s;letter-spacing:.5px;
+}
+.filter:hover,.filter.active{
+ background:var(--gold);color:#080807;border-color:var(--gold);
+}
+.search-box{
+ border:1px solid var(--border);display:flex;
+ align-items:center;padding:0 15px;gap:10px;min-width:230px;
+}
+.search-box span{color:var(--gold);font-size:22px}
+.search-box input{
+ background:transparent;border:0;outline:0;color:white;
+ padding:13px 0;width:100%;font-size:11px;
+}
+.search-box input::placeholder{color:#81796e}
+.product-count{
+ display:flex;justify-content:space-between;
+ color:var(--gold);font-size:9px;letter-spacing:2px;
+ border-bottom:1px solid var(--border);
+ padding-bottom:15px;margin-bottom:25px;
+}
+
+/* PRODUCT GRID */
+.product-grid{
+ display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+ gap:20px;
+}
+.product-card{
+ background:var(--surface);border:1px solid rgba(255,255,255,.06);
+ overflow:hidden;cursor:pointer;transition:.4s;
+ animation:cardIn .5s both;
+}
+@keyframes cardIn{
+ from{opacity:0;transform:translateY(20px)}
+ to{opacity:1;transform:translateY(0)}
+}
+.product-card:hover{
+ transform:translateY(-8px);border-color:var(--gold);
+ box-shadow:0 15px 40px #0008;
+}
+.product-image{
+ position:relative;overflow:hidden;
+ background:#15130f;aspect-ratio:4/5;
+}
+.product-image img{
+ width:100%;height:100%;object-fit:contain;
+ display:block;padding:7px;transition:.6s;
+}
+.product-card:hover .product-image img{transform:scale(1.045)}
+.product-tag{
+ position:absolute;top:12px;left:12px;
+ background:#080807dd;border:1px solid var(--border);
+ color:var(--gold);padding:7px 10px;
+ font-size:8px;letter-spacing:1px;
+}
+.product-details{padding:17px}
+.product-category{
+ color:var(--gold);font-size:8px;
+ letter-spacing:2px;text-transform:uppercase;
+}
+.product-details h3{
+ font-family:var(--serif);font-size:22px;
+ font-weight:500;margin:9px 0;
+}
+.product-details p{
+ color:var(--muted);font-size:10px;line-height:1.7;
+ min-height:34px;
+}
+.view-product{
+ display:flex;justify-content:space-between;align-items:center;
+ border-top:1px solid var(--border);margin-top:15px;padding-top:13px;
+ color:var(--gold);font-size:9px;letter-spacing:1.5px;
+}
+.view-product span:last-child{font-size:17px;transition:.3s}
+.product-card:hover .view-product span:last-child{transform:translateX(5px)}
+.empty-state{
+ text-align:center;color:var(--muted);
+ padding:60px;font-family:var(--serif);font-size:25px;
+}
+
+/* STORY */
+.brand-story{
+ background:radial-gradient(ellipse at 80% 50%,#d6ad641c,transparent 35%),#100e0a;
+ border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+ display:flex;justify-content:space-between;align-items:center;
+ min-height:490px;position:relative;overflow:hidden;
+}
+.story-content{position:relative;z-index:2;max-width:530px}
+.story-content h2{margin:25px 0}
+.story-content p{
+ color:var(--muted);font-size:12px;line-height:2;
+ max-width:430px;margin-bottom:30px;
+}
+.story-decoration{
+ position:absolute;right:20%;font-family:var(--serif);
+ font-size:400px;color:#d6ad640a;
+}
+.story-logo{position:relative;z-index:2;text-align:center}
+.story-logo img{width:210px;height:210px;object-fit:contain}
+.story-logo p{font-size:9px;letter-spacing:4px;color:var(--gold)}
+
+/* CONTACT */
+.contact-section{text-align:center;background:#0b0a08}
+.contact-inner{max-width:650px;margin:auto}
+.contact-inner h2{margin:25px 0}
+.contact-inner p{font-size:12px;color:var(--muted);line-height:2;margin-bottom:30px}
+
+/* FOOTER */
+.footer{
+ padding:40px 8%;border-top:1px solid var(--border);
+ display:flex;align-items:center;justify-content:space-between;
+ gap:20px;flex-wrap:wrap;
+}
+.footer img{height:65px;width:65px;object-fit:contain}
+.footer p,.footer>span{font-size:9px;letter-spacing:2px;color:var(--muted)}
+
+/* PRODUCT MODAL */
+.modal{
+ position:fixed;inset:0;z-index:500;
+ display:none;align-items:center;justify-content:center;padding:20px;
+}
+.modal.open{display:flex}
+.modal-backdrop{
+ position:absolute;inset:0;background:#000e;
+ backdrop-filter:blur(10px);
+}
+.modal-content{
+ position:relative;z-index:2;background:#13110e;
+ border:1px solid var(--border);width:min(850px,100%);
+ display:grid;grid-template-columns:1fr 1fr;
+ max-height:90vh;overflow:auto;
+ animation:modalIn .35s ease;
+}
+@keyframes modalIn{
+ from{opacity:0;transform:translateY(20px)}
+ to{opacity:1;transform:translateY(0)}
+}
+.modal-close{
+ position:absolute;right:15px;top:10px;
+ background:none;border:0;color:var(--gold);font-size:30px;
+}
+.modal-image{
+ background:#18150f;min-height:400px;
+ display:flex;align-items:center;justify-content:center;
+}
+.modal-image img{width:100%;height:100%;max-height:520px;object-fit:contain;padding:10px}
+.modal-info{
+ padding:55px 35px;display:flex;flex-direction:column;justify-content:center;
+}
+.modal-info h2{font-family:var(--serif);font-size:42px;font-weight:500;margin:18px 0}
+.modal-divider{height:1px;width:50px;background:var(--gold);margin-bottom:25px}
+.modal-info p{font-size:12px;color:var(--muted);line-height:2;margin-bottom:30px}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(25px);transition:.8s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:1050px){
+ .product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:700px){
+ .navbar{height:75px;padding:0 5%}
+ .brand img{width:65px;height:65px}
+ .menu-toggle{display:block}
+ .nav-button{display:none}
+ .nav-links{
+  display:none;position:absolute;top:75px;left:0;width:100%;
+  padding:25px;background:#0d0c09;
+  flex-direction:column;gap:25px;border-bottom:1px solid var(--border);
+ }
+ .nav-links.show{display:flex}
+ .hero{min-height:620px;padding:70px 7%}
+ .hero h1{font-size:53px}
+ .hero-stats{gap:23px;flex-wrap:wrap;margin-top:60px}
+ .hero-stats span{font-size:8px}
+ .hero-side{display:none}
+ .brand-strip{gap:16px;padding:20px}
+ .brand-strip span{font-size:8px}
+ .section{padding:75px 6%}
+ .section-heading{display:block}
+ .section-heading h2,.story-content h2,.contact-inner h2{font-size:51px}
+ .section-heading>p{margin-top:20px}
+ .catalogue-tools{align-items:stretch}
+ .filters{gap:7px}
+ .filter{padding:10px 12px;font-size:8px}
+ .search-box{width:100%}
+ .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+ .product-details{padding:12px}
+ .product-details h3{font-size:19px}
+ .product-details p{font-size:9px}
+ .product-tag{font-size:7px;top:8px;left:8px;padding:6px}
+ .view-product{font-size:8px}
+ .brand-story{display:block;min-height:auto}
+ .story-logo{margin-top:50px}
+ .story-decoration{font-size:250px;right:0}
+ .footer{justify-content:center;text-align:center;flex-direction:column}
+ .modal-content{grid-template-columns:1fr;max-width:440px}
+ .modal-image{height:300px;min-height:300px}
+ .modal-info{padding:28px}
+ .modal-info h2{font-size:35px}
+}
+@media(max-width:380px){
+ .product-grid{grid-template-columns:1fr}
+ .product-image{aspect-ratio:4/3}
+ .hero h1{font-size:45px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{
+  scroll-behavior:auto!important;
+  animation-duration:.01ms!important;
+  transition-duration:.01ms!important;
+ }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOADING SCREEN -->
+<div class="loader" id="loader">
+  <img src="./logo.jpeg" alt="MAVIRA">
+ <p>THE ART OF EVERYDAY LUXURY</p>
+ <div class="loader-line"></div>
+</div>
+
+<div class="announcement">
+ THE ART OF EVERYDAY LUXURY · DISCOVER MAVIRA
+</div>
+
+<!-- NAVBAR -->
+<header class="navbar">
+ <a href="#home" class="brand">
+  <img src="./logo.jpeg" alt="MAVIRA">
+ </a>
+
+ <nav class="nav-links" id="navLinks">
+  <a href="#home">Home</a>
+  <a href="#collection">Collection</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+ </nav>
+
+ <a href="#collection" class="nav-button">
+  EXPLORE COLLECTION <span>↗</span>
+ </a>
+
+ <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="home">
+ <div class="hero-glow"></div>
+
+ <div class="hero-content reveal">
+  <span class="eyebrow"><i></i> THE MAVIRA COLLECTION <i></i></span>
+
+  <h1>
+   Everyday essentials.<br>
+   <span>Extraordinary elegance.</span>
+  </h1>
+
+  <p>
+   Discover a thoughtfully curated collection of beauty,
+   skincare, fragrances and personal care essentials.
+   Experience the art of everyday luxury with MAVIRA.
+  </p>
+
+  <div class="hero-actions">
+   <a href="#collection" class="gold-button">EXPLORE PRODUCTS ↗</a>
+   <a href="#about" class="text-button">DISCOVER MAVIRA ↓</a>
+  </div>
+
+  <div class="hero-stats">
+   <div><strong>22+</strong><span>Curated Products</span></div>
+   <div><strong>08</strong><span>Product Categories</span></div>
+   <div><strong>01</strong><span>Premium Destination</span></div>
+  </div>
+ </div>
+
+ <div class="hero-side">BEAUTY · CARE · ELEGANCE</div>
+</section>
+
+<div class="brand-strip">
+ <span>SKINCARE</span><b>✦</b>
+ <span>FRAGRANCES</span><b>✦</b>
+ <span>BEAUTY</span><b>✦</b>
+ <span>PERSONAL CARE</span>
+</div>
+
+<!-- COLLECTION -->
+<section class="section" id="collection">
+
+ <div class="section-heading reveal">
+  <div>
+   <span class="eyebrow">DISCOVER MAVIRA</span>
+   <h2>Our <em>Collection</em></h2>
+  </div>
+  <p>
+   Explore our selection of beauty and personal care essentials.<br>
+   Find your next everyday favourite.
+  </p>
+ </div>
+
+ <div class="catalogue-tools">
+
+  <div class="filters" id="filters">
+   <button class="filter active" data-category="all">All Products</button>
+   <button class="filter" data-category="skincare">Skincare</button>
+   <button class="filter" data-category="facewash">Face Wash</button>
+   <button class="filter" data-category="facial">Facial Kits</button>
+   <button class="filter" data-category="handwash">Hand Wash</button>
+   <button class="filter" data-category="perfume">Perfumes</button>
+   <button class="filter" data-category="haircare">Haircare</button>
+   <button class="filter" data-category="makeup">Makeup</button>
+   <button class="filter" data-category="bodycare">Body Care</button>
+  </div>
+
+  <div class="search-box">
+   <span>⌕</span>
+   <input type="search" id="searchInput" placeholder="Search products...">
+  </div>
+
+ </div>
+
+ <div class="product-count">
+  <span id="productCount">22 PRODUCTS</span>
+  <span>THE MAVIRA EDITION</span>
+ </div>
+
+ <div class="product-grid" id="productGrid"></div>
+
+ <div class="empty-state" id="emptyState" hidden>
+  No products found. Try another search.
+ </div>
+
+</section>
+
+<!-- BRAND STORY -->
+<section class="brand-story section" id="about">
+
+ <div class="story-decoration">M</div>
+
+ <div class="story-content reveal">
+  <span class="eyebrow">A NOTE FROM MAVIRA</span>
+
+  <h2>Elegance is in<br>the <em>details.</em></h2>
+
+  <p>
+   MAVIRA brings together a curated selection of beauty,
+   skincare, fragrances and personal care products in
+   one elegant destination.
+   Explore, discover and find your everyday essentials.
+  </p>
+
+  <a href="#collection" class="gold-button">VIEW COLLECTION ↗</a>
+ </div>
+
+ <div class="story-logo">
+  <img src="assets/logo.png" alt="MAVIRA">
+  <p>THE ART OF EVERYDAY LUXURY</p>
+ </div>
+
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section section" id="contact">
+
+ <div class="contact-inner reveal">
+  <span class="eyebrow">LET'S CONNECT</span>
+
+  <h2>Find your next <em>favourite.</em></h2>
+
+  <p>
+   Have a question about a product?
+   Contact us directly on WhatsApp for enquiries.
+  </p>
+
+  <a
+   href="https://wa.me/916284035658?text=Hello%20MAVIRA!%20I%20would%20like%20to%20know%20more%20about%20your%20products."
+   target="_blank"
+   rel="noopener"
+   class="gold-button">
+   CHAT ON WHATSAPP ↗
+  </a>
+ </div>
+
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+ <a href="#home">
+  <img src="assets/logo.png" alt="MAVIRA">
+ </a>
+
+ <p>THE ART OF EVERYDAY LUXURY.</p>
+
+ <span>© <span id="year"></span> MAVIRA. ALL RIGHTS RESERVED.</span>
+</footer>
+
+<!-- PRODUCT POPUP -->
+<div class="modal" id="productModal" aria-hidden="true">
+
+ <div class="modal-backdrop" id="modalBackdrop"></div>
+
+ <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
+  <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+
+  <div class="modal-image">
+   <img id="modalImage" src="" alt="">
+  </div>
+
+  <div class="modal-info">
+   <span class="eyebrow" id="modalCategory"></span>
+   <h2 id="modalTitle"></h2>
+   <div class="modal-divider"></div>
+   <p id="modalDescription"></p>
+
+   <a
+    href="#"
+    id="modalEnquiry"
+    class="gold-button"
+    target="_blank"
+    rel="noopener">
+    ENQUIRE ON WHATSAPP ↗
+   </a>
+  </div>
+
+ </div>
+</div>
+
+<script>
+
+// ==========================================
+// MAVIRA PRODUCT DATABASE
+// All images are PNG files in the assets folder
+// ==========================================
+
+const products = [
+
+ {
+  name: "Nivea Nourishing Body Milk",
+  image: "nivia.png",
+  category: "bodycare",
+  tag: "BODY CARE",
+  description: "Nivea Nourishing Body Milk. 72-hour moisture care."
+},
+{
+  name: "Minimalist Salicylic Acid Cleanser",
+  image: "minimilast1.png",
+  category: "skincare",
+  tag: "SKINCARE",
+  description: "Minimalist Salicylic Acid Cleanser."
+},
+{
+  name: "Minimalist B12 + Oat Cleanser",
+  image: "minimilat2.png",
+  category: "skincare",
+  tag: "SKINCARE",
+  description: "Minimalist B12 + Oat Gentle Cleanser."
+},
+
+ {
+  name:"Neem & Lemon Handwash",
+  category:"handwash",
+  image:"handwash1.png",
+  tag:"HAND WASH",
+  description:"Neem and Lemon handwash. A refreshing everyday hand-cleansing product."
+ },
+
+ {
+  name:"French Aqua Handwash",
+  category:"handwash",
+  image:"handwash2.png",
+  tag:"HAND WASH",
+  description:"French Aqua handwash. A refreshing handwashing essential."
+ },
+
+ {
+  name:"NEXT Arabian Scent",
+  category:"perfume",
+  image:"perfume1.png",
+  tag:"FRAGRANCE",
+  description:"NEXT Arabian Scent Eau de Parfum. An elegant fragrance presentation."
+ },
+
+ {
+  name:"NEXT Gold Scent",
+  category:"perfume",
+  image:"perfume2.png",
+  tag:"FRAGRANCE",
+  description:"NEXT Gold Scent Eau de Parfum. A sophisticated fragrance selection."
+ },
+
+ {
+  name:"NEXT Olive Oud",
+  category:"perfume",
+  image:"perfume3.png",
+  tag:"FRAGRANCE",
+  description:"NEXT Olive Oud Eau de Parfum. A distinctive oud-inspired fragrance."
+ },
+
+ {
+  name:"NEXT Velvet Oud",
+  category:"perfume",
+  image:"perfume4.png",
+  tag:"FRAGRANCE",
+  description:"NEXT Velvet Oud Eau de Parfum. A luxurious fragrance selection."
+ },
+
+ {
+  name:"Cocoa Butter Body Lotion",
+  category:"bodycare",
+  image:"cocobutter.png",
+  tag:"BODY CARE",
+  description:"Pure Roots Cocoa Butter Intense Nourishing Body Care Lotion with Cocoa and Shea Butter. 400ml."
+ },
+
+ {
+  name:"Neem Face Wash",
+  category:"facewash",
+  image:"neem.png",
+  tag:"FACE WASH",
+  description:"Pure Roots Neem Face Wash. Marketed for preventing pimples. 100ml."
+ },
+
+ {
+  name:"Kakadu Plum Facial Kit",
+  category:"facial",
+  image:"plum.png",
+  tag:"FACIAL KIT",
+  description:"Astaberry Professional Kakadu Plum Facial Kit with Vitamin C and Niacinamide. 6 steps."
+ },
+
+ {
+  name:"Ubtan Face Wash",
+  category:"facewash",
+  image:"ubtan.png",
+  tag:"FACE WASH",
+  description:"Pure Roots Ubtan Face Wash. Helps cleanse and clarify complexion. 100ml."
+ },
+
+ {
+  name:"Gotu Kola Facial Kit",
+  category:"facial",
+  image:"gottu.png",
+  tag:"FACIAL KIT",
+  description:"Astaberry Professional Gotu Kola Facial Kit with Salicylic Acid, Niacinamide and Tea Tree Oil. 6 steps."
+ },
+
+ {
+  name:"Gold Face Wash",
+  category:"facewash",
+  image:"gold.png",
+  tag:"FACE WASH",
+  description:"Pure Roots Gold Face Wash for clear and glowing-looking skin. 100ml."
+ },
+
+ {
+  name:"Skyline Compact Powder",
+  category:"makeup",
+  image:"skyline.png",
+  tag:"MAKEUP",
+  description:"Magic Blossom Skyline Powder. Long-lasting, soft and smooth finish."
+ },
+
+ {
+  name:"Glass Skin Glow Facial Kit",
+  category:"facial",
+  image:"glass skin.png",
+  tag:"FACIAL KIT",
+  description:"Astaberry Professional Glass Skin Glow Facial Kit with Fermented Rice Extract and Allantoin. 6 steps."
+ },
+
+ {
+  name:"Skin Brightening Facial Kit",
+  category:"facial",
+  image:"skin.png",
+  tag:"FACIAL KIT",
+  description:"Astaberry Professional Skin Brightening Facial Kit with Hyaluronic Acid and Arbutin. 6 steps."
+ },
+
+ {
+  name:"Olivia Hair Serum",
+  category:"haircare",
+  image:"olivahair.png",
+  tag:"HAIR CARE",
+  description:"Olivia Moisture Lock Nourishment Hair Serum with Argan Oil Extract. 75ml."
+ },
+
+ {
+  name:"Matte Compact Powder",
+  category:"makeup",
+  image:"compact.png",
+  tag:"MAKEUP",
+  description:"Magic Blossom Matte Compact Powder. Ultra-lightweight foundation for normal to oily skin."
+ },
+
+ {
+  name:"Fruit Vinegar Gel Hair Colour",
+  category:"haircare",
+  image:"fruit.png",
+  tag:"HAIR COLOUR",
+  description:"Proads Professional Fruit Vinegar Gel Based Hair Colour in Natural Black. 500ml × 2."
+ },
+
+ {
+  name:"Collagen Pro Facial Kit",
+  category:"facial",
+  image:"collagen.png",
+  tag:"FACIAL KIT",
+  description:"Astaberry Professional Collagen Pro Facial Kit with Hydrolyzed Collagen and Acai Berry. 6 steps."
+ }
+
+];
+
+// ==========================================
+// SETTINGS
+// ==========================================
+
+const WHATSAPP_NUMBER = "916284035658";
+const ASSET_FOLDER = "./";
+
+// ==========================================
+// PRODUCT RENDERING
+// ==========================================
+
+const productGrid = document.getElementById("productGrid");
+const searchInput = document.getElementById("searchInput");
+const productCount = document.getElementById("productCount");
+const emptyState = document.getElementById("emptyState");
+
+let activeCategory = "all";
+
+function renderProducts(){
+
+ const search = searchInput.value.toLowerCase().trim();
+
+ const filtered = products.filter(product => {
+
+  const categoryMatch =
+   activeCategory === "all" ||
+   product.category === activeCategory;
+
+  const searchMatch =
+   product.name.toLowerCase().includes(search) ||
+   product.category.toLowerCase().includes(search) ||
+   product.description.toLowerCase().includes(search);
+
+  return categoryMatch && searchMatch;
+ });
+
+ productGrid.innerHTML = "";
+
+ filtered.forEach((product,index)=>{
+
+  const card = document.createElement("article");
+  card.className = "product-card";
+  card.style.animationDelay = `${index*40}ms`;
+
+  card.innerHTML = `
+   <div class="product-image">
+    <img
+     src="${ASSET_FOLDER}${encodeURIComponent(product.image)}"
+     alt="${product.name}"
+     loading="lazy"
+     onerror="this.style.opacity='0.15';this.alt='Image not found: ${product.image}'"
+    >
+    <span class="product-tag">${product.tag}</span>
+   </div>
+
+   <div class="product-details">
+    <span class="product-category">${product.category}</span>
+    <h3>${product.name}</h3>
+    <p>${product.description}</p>
+
+    <div class="view-product">
+     <span>VIEW DETAILS</span>
+     <span>↗</span>
+    </div>
+   </div>
+  `;
+
+  card.addEventListener("click",()=>openProduct(product));
+
+  productGrid.appendChild(card);
+
+ });
+
+ productCount.textContent = `${filtered.length} PRODUCTS`;
+ emptyState.hidden = filtered.length !== 0;
+}
+
+renderProducts();
+
+// ==========================================
+// CATEGORY FILTERS
+// ==========================================
+
+document.getElementById("filters").addEventListener("click",event=>{
+
+ const button = event.target.closest(".filter");
+ if(!button)return;
+
+ document.querySelectorAll(".filter").forEach(btn=>{
+  btn.classList.remove("active");
+ });
+
+ button.classList.add("active");
+ activeCategory = button.dataset.category;
+
+ renderProducts();
+});
+
+searchInput.addEventListener("input",renderProducts);
+
+// ==========================================
+// WHATSAPP ENQUIRY
+// ==========================================
+
+function whatsappLink(productName){
+
+ const message =
+  `Hello MAVIRA! I am interested in ${productName}. Please share the price and availability.`;
+
+ return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
+// ==========================================
+// PRODUCT DETAILS MODAL
+// ==========================================
+
+const modal = document.getElementById("productModal");
+
+function openProduct(product){
+
+ const image = document.getElementById("modalImage");
+
+ image.src = ASSET_FOLDER + encodeURIComponent(product.image);
+ image.alt = product.name;
+
+ document.getElementById("modalTitle").textContent = product.name;
+ document.getElementById("modalCategory").textContent = product.category;
+ document.getElementById("modalDescription").textContent = product.description;
+
+ const enquiry = document.getElementById("modalEnquiry");
+
+ enquiry.href = whatsappLink(product.name);
+
+ modal.classList.add("open");
+ modal.setAttribute("aria-hidden","false");
+ document.body.style.overflow = "hidden";
+ document.getElementById("modalClose").focus();
+}
+
+function closeProduct(){
+
+ modal.classList.remove("open");
+ modal.setAttribute("aria-hidden","true");
+ document.body.style.overflow = "";
+}
+
+document.getElementById("modalClose")
+ .addEventListener("click",closeProduct);
+
+document.getElementById("modalBackdrop")
+ .addEventListener("click",closeProduct);
+
+document.addEventListener("keydown",event=>{
+
+ if(event.key==="Escape")closeProduct();
+
+});
+
+// ==========================================
+// MOBILE NAVIGATION
+// ==========================================
+
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+menuToggle.addEventListener("click",()=>{
+
+ navLinks.classList.toggle("show");
+
+ menuToggle.textContent =
+  navLinks.classList.contains("show") ? "×" : "☰";
+});
+
+navLinks.querySelectorAll("a").forEach(link=>{
+
+ link.addEventListener("click",()=>{
+  navLinks.classList.remove("show");
+  menuToggle.textContent="☰";
+ });
+
+});
+
+// ==========================================
+// SCROLL ANIMATIONS
+// ==========================================
+
+const observer = new IntersectionObserver(entries=>{
+
+ entries.forEach(entry=>{
+
+  if(entry.isIntersecting){
+   entry.target.classList.add("visible");
+   observer.unobserve(entry.target);
+  }
+
+ });
+
+},{threshold:0.12});
+
+document.querySelectorAll(".reveal").forEach(element=>{
+ observer.observe(element);
+});
+
+// ==========================================
+// LOADER AND FOOTER
+// ==========================================
+
+window.addEventListener("load",()=>{
+
+ setTimeout(()=>{
+  document.getElementById("loader").classList.add("hide");
+ },500);
+
+});
+
+document.getElementById("year").textContent =
+ new Date().getFullYear();
+
+</script>
+</body>
+</html>
